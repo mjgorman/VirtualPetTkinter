@@ -12,7 +12,14 @@ class Start(Frame):
     self.pack(fill=BOTH, expand=1)
     self.initUI()
 
-  def initUI(self):
+  def initMenu(self):
+    menubar = Menu(self.parent)
+    self.parent.config(menu=menubar)
+    fileMenu = Menu(menubar)
+    fileMenu.add_command(label="Exit", command=self.quit)
+    menubar.add_cascade(label="File", menu=fileMenu) 
+
+  def initBase(self):
     w = 320
     h = 240
     sw = self.parent.winfo_screenwidth()
@@ -20,7 +27,6 @@ class Start(Frame):
     x = (sw - w)/2
     y = (sh - h)/2
     self.parent.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
     self.style = Style()
     self.style.theme_use("default")
     self.columnconfigure(1, weight=1)
@@ -29,10 +35,21 @@ class Start(Frame):
     self.rowconfigure(1, weight=1)
     self.rowconfigure(2, pad=7)
 
+  def initLogo(self):
+    logo = Text(self)
+    logo.grid(row=1, column=1, columnspan=3)
+    
+  def initInterface(self):
     startButton = Button(self, text="Start", command=self.quit)
     startButton.grid(row=2, column=2)
     quitButton = Button(self, text="Quit", command=self.quit)
     quitButton.grid(row=2, column=3)
+    
+  def initUI(self):
+    self.initMenu()
+    self.initBase()
+    self.initLogo()
+    self.initInterface()
 
 def main():
   root = Tk()
