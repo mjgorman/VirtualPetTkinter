@@ -1,11 +1,10 @@
-#!/usr/bin/pythonw
+#!/usr/bin/python
 
 from Tkinter import *
 from ttk import Frame, Button, Style
 
-
 class Start(Frame):
-  def __init__(self, parent):
+  def __init__(self, parent, takefocus=1):
     Frame.__init__(self, parent)
     self.parent = parent
     self.parent.title("Starting")
@@ -54,6 +53,9 @@ class Start(Frame):
 def main():
   root = Tk()
   app = Start(root)
+  root.lift()
+  root.call('wm', 'attributes', '.', '-topmost', True)
+  root.after_idle(root.call, 'wm', 'attributes', '.', '-topmost', False)
   root.mainloop() 
 
 if __name__ == "__main__":
