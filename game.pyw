@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 from Tkinter import *
+import PIL
+from PIL import ImageTk, Image
 from ttk import Frame, Button, Style
 
 class Start(Frame):
@@ -28,21 +30,24 @@ class Start(Frame):
     self.parent.geometry('%dx%d+%d+%d' % (w, h, x, y))
     self.style = Style()
     self.style.theme_use("default")
-    self.columnconfigure(1, weight=1)
+    self.columnconfigure(0, weight=1)
+    self.columnconfigure(1, pad=7)
     self.columnconfigure(2, pad=7)
-    self.columnconfigure(3, pad=7)
-    self.rowconfigure(1, weight=1)
-    self.rowconfigure(2, pad=7)
+    self.rowconfigure(0, weight=1)
+    self.rowconfigure(1, pad=7)
 
   def initLogo(self):
-    logo = Text(self)
-    logo.grid(row=1, column=1, columnspan=3)
+    logoimg = Image.open("logo.jpg")
+    logotk = ImageTk.PhotoImage(logoimg)
+    logo = Label(self, image=logotk, borderwidth=0, highlightthickness=0)
+    logo.img = logotk
+    logo.grid(row=0, column=0, columnspan=3)
     
   def initInterface(self):
     startButton = Button(self, text="Start", command=self.quit)
-    startButton.grid(row=2, column=2)
+    startButton.grid(row=1, column=1)
     quitButton = Button(self, text="Quit", command=self.quit)
-    quitButton.grid(row=2, column=3)
+    quitButton.grid(row=1, column=2)
     
   def initUI(self):
     self.initMenu()
