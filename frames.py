@@ -4,7 +4,7 @@ from Tkinter import *
 from ttk import Frame, Button, Style
 
 class BaseTemplate(Frame):
-  def __init__(self, parent, takefocus=1):
+  def __init__(self, parent):
     Frame.__init__(self, parent)
     self.parent = parent
     self.parent.title("Starting")
@@ -33,10 +33,7 @@ class BaseTemplate(Frame):
     self.rowconfigure(1, pad=7)
 
   def initInterface(self):
-    startButton = Button(self, text="Start", command=self.quit)
-    startButton.grid(row=1, column=1)
-    quitButton = Button(self, text="Quit", command=self.quit)
-    quitButton.grid(row=1, column=2)
+    pass
     
   def initUI(self):
     self.initMenu()

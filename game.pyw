@@ -20,6 +20,24 @@ class Start(BaseTemplate):
     self.initLogo()
     self.initInterface()
 
+  def load_started(self):
+    self.parent.destroy()
+    self.load_started = Started(Tk())
+
+
+  def initInterface(self):
+    startButton = Button(self, text="Start", command=self.load_started)
+    startButton.grid(row=1, column=1)
+    quitButton = Button(self, text="Quit", command=self.quit)
+    quitButton.grid(row=1, column=2)
+
+class Started(BaseTemplate):
+
+  def initInterface(self):
+    header = Label(self, text="Pet Status:")
+    header.grid(sticky=NW, row=0, column=0)
+
+
 def main():
   root = Tk()
   app = Start(root)
